@@ -12,8 +12,12 @@
 </script>
 
 <h1> Список дел </h1>
-
-<input bind:value={newItem} type="text" placeholder="new todo item..">
-<button on:click={addToList} disabled={!newItem}>
+<div>
+    <input class="input input-bordered join-item " bind:value={newItem} type="text" placeholder="new todo item..">
+    <button class= "tooltip tooltip-right btn btn-active" data-tip="Add item"
+on:click={addToList} disabled={!newItem}>
     Add
 </button>
+</div>
+
+    

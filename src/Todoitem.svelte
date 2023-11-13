@@ -9,7 +9,7 @@
 	// function boolcheck(statusChek)
 	// {
 	// 	dispatch('checkstatus',
-	// 	{
+	// {
 	// 		stat: statusChek.target.checked
 	// 	}
 	// 	)
@@ -24,15 +24,12 @@
 	}
 </script> 
 
-<remove> </remove>
 <div class = "tableflex">
-
-	<!-- <input bind:checked={todoitem.status} type="checkbox"> -->
-	<input on:change={(event) =>  dispatch('checkstatus', 
+	<input class="checkbox checkbox-warning" on:change={(event) =>  dispatch('checkstatus', 
 	{stat: event.target.checked})} 
 	checked = {todoitem.status} type = "checkbox"/>
 	
-	<div class:checked={todoitem.status}>
+	<div  class:checked={todoitem.status}>
 		{todoitem.text}
 	</div>	
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -58,6 +55,6 @@
 	{
 		font-size: 1.6em;
 		font-style: italic;
-		color: rgb(226, 111, 66);
+		color: chartreuse;
 	}
 </style>
