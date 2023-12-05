@@ -1,4 +1,4 @@
-import App from "./App.svelte"
+import App from "/workspace/new/src/App.svelte"
 import "./app.postcss";
 
 

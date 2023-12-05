@@ -1,84 +1,78 @@
 <script>
-	import ToDoApp from "./ToDoApp.svelte";
-	import AddToDoList from "./AddToDoList.svelte";
-	import CompSelect from "./CompSelect.svelte";
-	import Info from "./InfoToDoList.svelte";
-	import tegTest from "./tegH1.svelte";
-	import SignIn from "./SingIn.svelte";
-	import { supauser } from "./DataStore";
-	import { supabase } from "./DataStore";
-	import { onMount } from "svelte";
-	import FormYup from "./form.svelte";
-	
+	// import SignIn from "./SignIn.svelte";
+	// import SignUp from "./Signup.svelte";
 
-	const options = [
-		{ compName: 'ToDoApp', component: ToDoApp },
-		{ compName: 'CompSelect', component: CompSelect },
-		{ compName: 'Info', component: Info },
-	    { compName: 'AddToDoList', component: AddToDoList},
-	    { compName: 'tegTest', component: tegTest}
-	];
-	let selected = options[0];
+	import Form from "./form.svelte";
 
-	let data;
-	onMount(async () => {
-		let n = await supabase.from("ToDo").select("User_ID,Checked,Task");
-		console.log("N", n);
-		data = n.data;
-	});
+	import { supauser } from "./store";
+	import Signup from "./Sign_In.svelte";
+	import Todo from "./todo.svelte"
 
 	let comp = null;
+
 	function toggleComp() {
-		comp = SignIn;
+		comp = Signup; //SignIn //Form
 	}
 	function hideSignIn() {
 		comp = null;
 	}
 </script>
 
-<button on:click={async () => {let n = await supabase.from("ToDo").insert(
-	{User_ID: "x09a6e171-a591-49ab-8a1a-05138f902c7e",
-	Checked: 0,
-	Task: "Five"})}}> Test </button>
 
-<button on:click={toggleComp}>Comp</button>
+<main
+	class="border border-gray-400 flex flex-col align-middle justify-between min-h-screen h-auto p-2 m-2"
+>
+	<!-- заготовка для top-меню -->
 
-{#if $supauser.user != null }
-				<p>x{$supauser.user.id}</p>
-			{/if}
-	
-			<svelte:component this={comp} hide={hideSignIn}/>	
+	<ul class="flex flex-row h-10 content-center flex-wrap px-3 bg-cyan-500 text-black">
+		<li>
+			<button on:click={toggleComp}>Вход</button>
+		</li>
+		<li>
+			<button on:click={() => (comp = null)}>Скрыть</button>
+		</li>
+		{#if $supauser.user}
+		    <li>
+			    <button on:click={() => (comp = Todo)}>Список дел</button>
+		    </li>
+		{/if}
+	</ul>
 
-{#if data}
+	<!-- <div class="flex flex-col items-center justify-center">
+		
+		{#if $supauser.user != null}
+			<p>x{$supauser.user.id}</p>
+		{/if}
+	</div> -->
+	<!-- tmp для проверки центрирования -->
+	<!-- <p class="self-center">middle tmp</p> -->
 
-	{#each data as item}
-		<div style="display:flex; flex-direction:column">
-			<p>{item.User_ID}</p>
-			<p>{item.Checked}</p>
-			<p>{item.Task}</p>
-		</div>
-	{/each}
-{/if}
-
-<!-- <select bind:value={selected}>
-	{#each options as option}
-		<option value={option}>{option.compName}</option>
-	{/each}
-</select>
-<svelte:component this={selected.component} />  -->
-<FormYup />
+	<!-- место для компонентов -->
+	<div class="w-1/2  bg-sky-500/75 m-auto">
+	    <svelte:component this={comp} hide={hideSignIn} class="m-auto " />
+    </div>
+	<div class=" p-2 bg-blue-300  text-black">
+		<p>
+			Footer (подвал). Всегда должен быть внизу страницы. Родитель д.б.
+			flex-col justify-between
+		</p>
+	</div>
+</main>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+	:global(body) {
+		height: 100vh;
+		background-color: rgb(235, 245, 245);
 	}
 
-	@media (min-width: 640px) {
+	/* навигацию сделать компонентом */
+	ul.flex li {
+		margin-left: 1rem;
+	}
+
+	@media (max-width: 640px) {
 		main {
-			max-width: none;
+			background-color: bisque;
 		}
 	}
 </style>

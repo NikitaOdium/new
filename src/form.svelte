@@ -52,7 +52,7 @@
     {JSON.stringify($form)}
 </div>
 
-<form on:submit={handleSubmit}>
+<form on:submit|preventDefault={handleSubmit}>
     <div>
         <label for="title">title</label>
         <select
