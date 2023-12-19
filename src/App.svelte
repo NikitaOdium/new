@@ -16,6 +16,12 @@
 	function hideSignIn() {
 		comp = null;
 	}
+	
+		
+	const progress = Math.random()
+
+	
+		
 </script>
 
 
@@ -50,12 +56,10 @@
 	<!-- место для компонентов -->
 	<div class="w-1/2  bg-sky-500/75 m-auto">
 	    <svelte:component this={comp} hide={hideSignIn} class="m-auto " />
+		
     </div>
-	<div class=" p-2 bg-blue-300  text-black">
-		<p>
-			Footer (подвал). Всегда должен быть внизу страницы. Родитель д.б.
-			flex-col justify-between
-		</p>
+	
+	<div class=" circle p-2 bg-blue-300  text-black">
 	</div>
 </main>
 
@@ -75,4 +79,27 @@
 			background-color: bisque;
 		}
 	}
+	.circle {
+  		
+		  background: #c51c1c;
+border: 0.1875em solid #000000;
+border-radius: 50%;
+box-shadow: 0.375em 0.375em 0 0 rgba(15, 28, 63, 0.125);
+height: 5em;
+width: 5em;
+--width: 100px;
+		--height: 100px;
+		position: absolute;
+		width: var(--width);
+		height: var(--height);
+		left: calc(50% - var(--width) / 2);
+		top: calc(50% - var(--height) / 2);
+		border-radius: 100px;
+		
+		
+}
+
+
+	
 </style>
+
